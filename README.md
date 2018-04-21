@@ -1,8 +1,9 @@
 # AntiAds-spotify
 AntiAds Spotify Google by Unbound DNS
-Installation
 
-Install the unbound package.
+# Installation
+
+  Install the unbound package.
 
 Additionally, the expat package is required for #DNSSEC validation.
 Configuration
@@ -18,7 +19,7 @@ server:
   setting: value
   ...
 
-Local DNS server
+# Local DNS server
 
 If you want to use unbound as your local DNS server, set your nameserver to 127.0.0.1 in your resolv.conf. You will want to have your nameserver be preserved.
 Tip: A simple way to do this is to install the openresolv package and uncomment the line containing name_servers=127.0.0.1 in /etc/resolvconf.conf. Then run resolvconf -u to generate /etc/resolv.conf.
@@ -34,7 +35,7 @@ For querying a host that is not cached as an address the resolver needs to start
 
 First point unbound to the root.hints file:
 
-root-hints: "/etc/unbound/root.hints"
+  root-hints: "/etc/unbound/root.hints"
 
 Then, put a root hints file into the unbound configuration directory. The simplest way to do this is to run the command:
 
@@ -45,7 +46,7 @@ DNSSEC validation
 
 To use DNSSEC validation, point unbound to the server trust anchor file by adding the following setting under server::
 
-/etc/unbound/unbound.conf
+  /etc/unbound/unbound.conf
 
 trust-anchor-file: trusted-key.key
 
@@ -267,3 +268,5 @@ However it is not possible to arbitrarily increase num-threads above 1 without c
 Set the outgoing-range to as large a value as possible, see the sections in the referred web page above on how to overcome the limit of 1024 in total. This services more clients at a time. With 1 core, try 950. With 2 cores, try 450. With 4 cores try 200. The num-queries-per-thread is best set at half the number of the outgoing-range.
 
 Because of the limit on outgoing-range thus also limits num-queries-per-thread, it is better to compile with libevent, so that there is no 1024 limit on outgoing-range. If you need to compile this way for a heavy duty DNS server then you will need to compile the programme from source instead of using the unbound package.
+
+  SOURCES https://wiki.archlinux.org/index.php/Unbound
